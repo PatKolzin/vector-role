@@ -22,7 +22,7 @@ vector_config:
       inputs:
         - parse_logs
       database: vector_logs
-      endpoint: "http://130.193.36.189:8123"
+      endpoint: "http://84.201.173.87:8123"
       table: logs_logs
       compression: gzip
   api:
