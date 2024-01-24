@@ -3,7 +3,7 @@
 - block:
   - name: Get vector distrib
     ansible.builtin.get_url:
-      url: "https://packages.timber.io/vector/latest/vector-{{ vector_version }}.{{ ansible_architecture }}.rpm"
+      url: "https://packages.timber.io/vector/0.35.0/vector-{{ vector_version }}.{{ ansible_architecture }}.rpm"
       dest: "./vector-{{ vector_version }}.{{ ansible_architecture }}.rpm"
   - name: Install vector package
     become: true
