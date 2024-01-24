@@ -1,0 +1,30 @@
+---
+# defaults file for vector-role
+vector_version: "0.34.1-1"
+vector_config:
+  sources:
+    logs_logs:
+      type: demo_logs
+      format: syslog
+      interval: 1
+  transforms:
+    parse_logs:
+      inputs:
+        - logs_logs
+      source: |-
+        . = parse_syslog!(string!(.message))
+        .timestamp = to_string(.timestamp)
+        .timestamp = slice!(.timestamp, start:0, end: -1)
+      type: remap
+  sinks:
+    to_clickhouse:
+      type: clickhouse
+      inputs:
+        - parse_logs
+      database: vector_logs
+      endpoint: "http://130.193.36.189:8123"
+      table: logs_logs
+      compression: gzip
+  api:
+    enabled: true
+    address: "0.0.0.0:8686"
